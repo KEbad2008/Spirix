@@ -1,4 +1,4 @@
-How to Play — Spirix
+How to Play --- Spirix
 
 Objective:
 Your goal is to survive as many waves as possible by destroying incoming metal enemies while avoiding taking damage.
