@@ -1,9 +1,5 @@
-<!--git add ., git commit -m "message", git push-->
-
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="icon" type="image/x-icon" href="favicon.png">
@@ -11,39 +7,33 @@
     <title>Spirix | Sawblade Survival</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+    
     <div id="game-container">
         <div id="announcement" class="hidden-ui">WAVE 1</div>
         <div id="wave-progress-container">
             <div id="wave-progress-bar"></div>
         </div>
-
         <div id="ui-left">
             <div id="health-bar-container">
                 <div id="health-bar"></div>
             </div>
             <div id="speed-display" class="hidden">SPEED: <span id="speed-val">0</span></div>
         </div>
-
         <div id="ui-right">
             <div>WAVE: <span id="wave-display">1</span></div>
-            <div>TIME: <span id="time-display">0</span>s</div>
+            <div>TIME: <span id="timer-display">0</span>s</div>
             <div>SCORE: <span id="score-display">0</span></div>
         </div>
-
         <canvas id="minimap"></canvas>
         <canvas id="gameCanvas"></canvas>
         <div id="game-over" class="hidden">
             <h1>GAME OVER</h1>
-            <p>You suvived uptil Wave <span id="final-wave">0</span></p>
+            <p>You survived to Wave <span id="final-wave">0</span></p>
             <button onclick="location.reload()">Try Again</button>
         </div>
     </div>
     <script src="game.js"></script>
-
 </body>
-
 </html>
-
-
+    
