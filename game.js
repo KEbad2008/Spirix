@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d');
 const mCanvas = document.getElementById('minimap');
 const mCtx = mCanvas.getContext('2d');
 
-const ZOOM = 0.8;
+const ZOOM = 0.8; 
 function resize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -12,8 +12,8 @@ function resize() {
 window.addEventListener('resize', resize);
 resize();
 
-const WORLD_RADIUS = 2000;
-const FRICTION = 0.92;
+const WORLD_RADIUS = 2000; 
+const FRICTION = 0.92; 
 
 let player = {
     worldX: 0, worldY: 0, velX: 0, velY: 0,
@@ -39,11 +39,11 @@ let gameOver = false;
 let timerInterval;
 
 window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-window.addEventListener('keydown', e => {
+window.addEventListener('keydown', e => { 
     if(e.key === "Shift") player.isShifting = true;
     if(e.code === "Space") player.isSpacing = true;
 });
-window.addEventListener('keyup', e => {
+window.addEventListener('keyup', e => { 
     if(e.key === "Shift") player.isShifting = false;
     if(e.code === "Space") player.isSpacing = false;
 });
@@ -114,14 +114,14 @@ function createEnemy(x, y, type) {
 }
 
 function spawnWave() {
-    enemies = enemies.filter(e => e.isBoss);
+    enemies = enemies.filter(e => e.isBoss); 
     bullets = []; puddles = [];
     webs = [];   // clear webs on new wave
     totalWaveTime = wave === 1 ? 8 : 15 + (wave * 2);
     timeLeft = totalWaveTime;
     announce("WAVE " + wave);
     startTimer();
-   
+    
     for(let i=0; i<8+wave; i++) {
         let p = getSafeCircularSpawn();
         puddles.push({x: p.x, y: p.y, r: 50 + Math.random()*70});
@@ -200,7 +200,7 @@ function update() {
     });
     player.webSlowTimer = inWeb ? 10 : Math.max(0, player.webSlowTimer - 1);
 
-    if (player.isSpacing) { player.bladeRadius = Math.min(player.maxBladeRadius, player.bladeRadius + 4); }
+    if (player.isSpacing) { player.bladeRadius = Math.min(player.maxBladeRadius, player.bladeRadius + 4); } 
     else if (player.isShifting) {
         player.bladeRadius = Math.max(player.minBladeRadius, player.bladeRadius - 4);
         if(player.health < player.maxHealth) player.health += 0.09;
@@ -224,7 +224,7 @@ function update() {
             player.velY += Math.sin(ang) * player.accel * webSlowFactor;
         }
     }
-   
+    
     player.velX *= FRICTION; player.velY *= FRICTION;
     player.worldX += player.velX; player.worldY += player.velY;
 
@@ -246,7 +246,7 @@ function update() {
         const dx = player.worldX - e.x; const dy = player.worldY - e.y;
         const d = Math.sqrt(dx*dx + dy*dy);
         let moveAngle = Math.atan2(dy, dx);
-       
+        
         if(e.type === 'mecha-shark') {
             if(e.sharkState === 'orbit') {
                 e.swimAngle += 0.05; moveAngle += 1.4;
@@ -314,19 +314,19 @@ function update() {
         if (d < player.bladeRadius + e.r) {
             e.hp -= (e.isBoss ? 0.4 : 5);
             if (Math.random() < 0.3) spawnParticles(e.x, e.y, e.color || '#fff', 3);
-            if(e.hp <= 0) {
+            if(e.hp <= 0) { 
                 camera.shake = e.isBoss ? 40 : 10;
                 spawnParticles(e.x, e.y, e.color || '#fff', 20);
-                score += e.isBoss ? 1000 : 100; enemies.splice(i, 1); i--;
+                score += e.isBoss ? 1000 : 100; enemies.splice(i, 1); i--; 
             }
-        }
+        } 
         if (d < player.radius + e.r) { player.health -= (e.isBoss ? 0.3 : 0.4); camera.shake = 5; }
     }
 
     bullets.forEach((b, i) => {
         b.x += b.vx; b.y += b.vy;
         const distFromCenter = Math.sqrt(b.x**2 + b.y**2);
-       
+        
         // WALL BOUNCING FOR BULLETS
         if(distFromCenter > WORLD_RADIUS) {
             if(b.bounces > 0) {
@@ -342,7 +342,7 @@ function update() {
             }
         }
 
-        if(Math.sqrt((player.worldX-b.x)**2 + (player.worldY-b.y)**2) < player.radius) {
+        if(Math.sqrt((player.worldX-b.x)**2 + (player.worldY-b.y)**2) < player.radius) { 
             player.health -= 6; bullets.splice(i, 1); camera.shake = 8;
             spawnParticles(player.worldX, player.worldY, '#7ed6df', 5);
         }
