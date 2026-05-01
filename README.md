@@ -37,3 +37,5 @@ Early waves are easier; difficulty increases steadily over time
 
 **Goal**:
 Survive for as long as possible and achieve the highest wave count and score!
+
+Thank you and enjoy the game!
